@@ -14,7 +14,7 @@ exports.products = ({
       // `&priceCurrency=${currency}` +
       // `&priceCountry=${country}` +
       // "&filter.query=variants.scopedPrice.value.centAmount%3A+range+%280+to+*%29" +
-      `&limit=1` +
+      `&limit=2` +
       `&offset=0`,
     {
       headers: {

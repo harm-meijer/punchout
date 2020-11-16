@@ -24,30 +24,25 @@ router.post("/catalog", (req, res) => {
       lib.withProducsts,
       ({ products }) =>
         products.map((product) => ({
-          IndexItem: {
-            IndexItemPunchout: {
-              ItemID: {
-                SupplierPartID: product.id,
-              },
-              PunchoutDetail: {
-                "@": {
-                  punchoutLevel: "product",
-                },
-                Description: Object.entries(
-                  product.name
-                ).map(([key, value]) => ({
+          IndexItemPunchout: {
+            ItemID: {
+              SupplierPartID: product.id,
+            },
+            PunchoutDetail: {
+              Description: Object.entries(product.name).map(
+                ([key, value]) => ({
                   "@": {
                     "xml:lang": key,
                   },
                   "#": value,
-                })),
-                URL: `${process.env.URL}product/${product.id}`,
-                Classification: {
-                  "@": {
-                    domain: "some domain",
-                  },
-                  "#": "cassificationvalue",
+                })
+              ),
+              URL: `${process.env.URL}product/${product.id}`,
+              Classification: {
+                "@": {
+                  domain: "some domain",
                 },
+                "#": "cassificationvalue",
               },
             },
           },
@@ -58,19 +53,23 @@ router.post("/catalog", (req, res) => {
     .then((result) => {
       res.set("Content-Type", "text/xml");
       res.send(
-        o2x({
-          '?xml version="1.0" encoding="UTF-8"?': null,
-          // '!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.012/cXML.dtd"': null,
-          Index: {
-            SupplierID: {
-              "@": {
-                domain: "some domain??",
+        `<?xml version="1.0" encoding="UTF-8"?>\n` +
+          `<!DOCTYPE Index SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.012/cXML.dtd">\n` +
+          o2x({
+            Index: {
+              SupplierID: {
+                "@": {
+                  domain: "some domain",
+                },
+                "#": "supplier id",
               },
-              "#": "supplier id",
+              Comments: {
+                "@": { "xml:lang": "en-US" },
+                "#": "Sample cXML/Index",
+              },
+              IndexItem: result,
             },
-            "#": result,
-          },
-        })
+          })
       );
     })
     .catch((err) => {
