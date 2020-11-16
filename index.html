@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Test commercetools punchout</title>
+  </head>
+  <body>
+    <form action="http://localhost:8080/catalog" method="POST">
+      <div>
+        <label>catalog
+        <textarea name='catalog'><?xml 
+          version="1.0" 
+          encoding="UTF-8"
+        ?>
+          <!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.014/cXML.dtd">
+          <cXML
+            xml:lang="en"
+            payloadID="1234567.4567.5678@buyer.com"
+            timestamp="1999-03-31T18:39:09-08:00"  
+          >
+            <Header>
+              <From>
+                <Credential domain="customer">
+                  <Identity>willy.wonka@commercetools.com</Identity>
+                </Credential>
+              </From>
+              <!-- <To>
+                <Credential domain="AribaNetworkUserId">
+                  <Identity>recipient@recipientcompany.com</Identity>
+                </Credential>
+              </To> -->
+              <Sender>
+                <Credential domain="commercetools">
+                  <Identity>willy.wonka@commercetools.com</Identity>
+                  <SharedSecret>EXDL1m0liWKPH-NOaCTPwzJbXgV48hXv</SharedSecret>
+                </Credential>
+                <UserAgent>test app</UserAgent>
+              </Sender>
+            </Header>
+            <Request>
+              Request information
+            </Request>
+         </cXML></textarea>
+      </div>
+      <div>
+        <input type="submit" value="send catalog request">
+      </div>
+    </form>
+    <form action="http://localhost:8080/login" method="POST">
+      <div>
+        <label>login
+        <textarea name='login'><?xml 
+          version="1.0" 
+          encoding="UTF-8"
+        ?>
+          <!DOCTYPE cXML SYSTEM "http://xml.cxml.org/schemas/cXML/1.2.014/cXML.dtd">
+          <cXML
+            xml:lang="en"
+            payloadID="1234567.4567.5678@buyer.com"
+            timestamp="1999-03-31T18:39:09-08:00"  
+          >
+            <Header>
+              <From>
+                <Credential domain="customer">
+                  <Identity>willy.wonka@commercetools.com</Identity>
+                </Credential>
+              </From>
+              <!-- <To>
+                <Credential domain="AribaNetworkUserId">
+                  <Identity>recipient@recipientcompany.com</Identity>
+                </Credential>
+              </To> -->
+              <Sender>
+                <Credential domain="commercetools">
+                  <Identity>willy.wonka@commercetools.com</Identity>
+                  <SharedSecret>p@ssword</SharedSecret>
+                </Credential>
+                <UserAgent>test app</UserAgent>
+              </Sender>
+            </Header>
+            <Request>
+              Request information
+            </Request>
+         </cXML></textarea>
+      </div>
+      <div>
+        <input type="submit" value="send login">
+      </div>
+    </form>
+  </body>
+</html>
